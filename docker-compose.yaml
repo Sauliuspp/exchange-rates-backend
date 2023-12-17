@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  redis:
+    container_name: redis
+    image: redis:7.2.3-alpine
+    ports:
+      - "6379:6379"
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.2.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=exchange_rates_db
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+    volumes:
+      - "./scripts/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql"

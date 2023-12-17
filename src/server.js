@@ -10,7 +10,8 @@ router.use((req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-    res.status(500).json('Error');
+    console.error(err);
+    res.status(500).json({ message: err.message });
 });
 
 module.exports = router;

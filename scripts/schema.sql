@@ -1,0 +1,5 @@
+CREATE TABLE access_logs(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ip_address VARCHAR(100) NOT NULL,
+    date datetime DEFAULT CURRENT_TIMESTAMP
+);
