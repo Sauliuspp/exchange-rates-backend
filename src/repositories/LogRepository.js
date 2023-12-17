@@ -13,6 +13,23 @@ class LogRepository {
             ip
         );
     }
+
+    getLogs = async (startDate, endDate) => {
+        let query =
+            `SELECT id, ip_address, date
+            FROM access_logs`;
+        query = (startDate && endDate) ? query += ` WHERE ? <= date AND date <= ?` : query;
+
+        const [logs] = await this.exchangeRateDb.query(
+            query,
+            [
+                startDate,
+                endDate,
+            ],
+        );
+
+        return logs;
+    }
 }
 
 module.exports = LogRepository;

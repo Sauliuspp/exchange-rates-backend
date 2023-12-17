@@ -36,7 +36,7 @@ class CurrencyService {
 
             return exchangeRates;
         } catch (error) {
-            throw new ApplicationError(400, 'Failed to fetch exchange rates');
+            throw new ApplicationError(500, 'Failed to fetch exchange rates');
         } finally {
             this.logRepository.logAccess(ip);
         }
