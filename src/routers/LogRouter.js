@@ -15,8 +15,8 @@ const logService = new LogService({ logRepository });
 const logController = new LogController({ logService });
 
 router.get('/logs', [
-    query('startDate').optional().isDate({ format: 'YYYY-MM-DD' }),
-    query('endDate').optional().isDate({ format: 'YYYY-MM-DD' }),
+    query('startDate').optional().trim().isDate({ format: 'YYYY-MM-DD' }),
+    query('endDate').optional().trim().isDate({ format: 'YYYY-MM-DD' }),
     validate,
 ], asyncWrap(logController.getLogs));
 

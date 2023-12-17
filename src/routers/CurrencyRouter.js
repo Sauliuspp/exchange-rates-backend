@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const { header } = require('express-validator');
+const { validate } = require('../RequestValidation');
 
 const { asyncWrap } = require('../Utils');
 
@@ -18,6 +20,9 @@ const currencyService = new CurrencyService({
 });
 const currencyController = new CurrencyController({ currencyService });
 
-router.get('/exchange-rates', [], asyncWrap(currencyController.getExchangeRates));
+router.get('/exchange-rates', [
+    header('x-api-key').trim().notEmpty().isAlphanumeric(),
+    validate,
+], asyncWrap(currencyController.getExchangeRates));
 
 module.exports = router;
